@@ -3,4 +3,17 @@
     width: 50px;
 }
 
+.post-area {
+    background-color: #fdf9f9;
+    height: 30%;
+}
+
+.post-area textarea {
+    background-color: #fdf9f9;
+    border: none;
+    resize: none;
+    width: 100%;
+    height: 100%;
+}
+
 .post-content {}
