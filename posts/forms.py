@@ -10,5 +10,5 @@ class CreatePostForm(forms.ModelForm):
             'content':"Content"
         }
         widgets = {
-            'content':forms.Textarea(attrs={'placeholder':'What in your mind ? Can you share this for everyone :3'})
+            'content':forms.Textarea(attrs={'placeholder':'What in your mind ? Can you share this for everyone :3','class':'rounded-4 p-2'})
         }

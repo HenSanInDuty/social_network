@@ -1,10 +1,10 @@
-from django.conf.urls import include, url
+from django.urls import path,include
 from authenticate.views import dashboard, logout_view, register, signin
 
 urlpatterns = [
-    url("accounts/", include("django.contrib.auth.urls")),
-    url("dashboard/", dashboard, name="dashboard"),
-    url("register/", register, name="register"),
-    url("signin/", signin, name="signin"),
-    url("logout/", logout_view, name="logout"),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("dashboard/", dashboard, name="dashboard"),
+    path("register/", register, name="register"),
+    path("signin/", signin, name="signin"),
+    path("logout/", logout_view, name="logout"),
 ]

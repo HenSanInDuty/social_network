@@ -24,10 +24,14 @@
         <div class="row justify-content-start">
         <div class="col-1 col-sm-1"></div>
         <div class="col-7 col-sm-6 d-flex flex-column">
-          <div class="post-area rounded d-flex flex-row justify-content-center">
-            <img class="avatar rounded-circle m-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nhan" alt="avatar" src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000">
-            {{form.content}}
-            <button type="btn" class="btn btn-success m-2">Post</button>
+          <div class="post-area rounded d-flex flex-row justify-content-center mt-2 mb-4">
+            <div class="post-main d-flex flex-row rounded">
+              <img class="avatar rounded-circle mx-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nhan" alt="avatar" src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000">
+              {{form.content}}
+              <button type="btn" class="btn btn-success btn-post mx-2">Post</button>
+            </div>
+            <div class="post-bottom">
+            </div>
           </div>
           {% block content %}{% endblock %}
         </div>
