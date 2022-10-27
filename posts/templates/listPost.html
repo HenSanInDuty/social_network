@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% load static%} {% block title %}Post{% endblock %}
+{% block content %}
+<div class="post-area rounded d-flex flex-row justify-content-center mt-2 mb-4">
+  <div class="post-main d-flex flex-row rounded">
+    <img
+      class="avatar rounded-circle mx-2"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      data-bs-title="Nhan"
+      alt="avatar"
+      src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+    />
+    {{form.content}}
+    <button type="btn" class="btn btn-success btn-post mx-2">Post</button>
+  </div>
+  <div class="post-bottom"></div>
+</div>
+<div class="post-list d-flex flex-column mb-4">
+  <div class="post-content rounded d-flex flex-column mb-2">
+    <div class="post-content-header d-flex flex-row py-2">
+      <img
+        class="avatar rounded-circle mx-2"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-title="Nhan"
+        alt="avatar"
+        src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+      />
+      <span class="post-username pt-3">Tran Trong Nhan</span>
+    </div>
+    <div class="post-content-body px-3 pb-3">
+        <p>Something won't home in your mind, why you keeping to thing about that ?</p>
+        <img class="image-body" alt="image-1" src="https://ghiencongnghe.info/wp-content/uploads/2021/07/GG-la-gi-000.jpg"/>
+    </div>
+  </div>
+
+  <div class="post-content rounded d-flex flex-column mb-2">
+    <div class="post-content-header d-flex flex-row py-2">
+      <img
+        class="avatar rounded-circle mx-2"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-title="Nhan"
+        alt="avatar"
+        src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+      />
+      <span class="post-username pt-3">Tran Trong Nhan</span>
+    </div>
+    <div class="post-content-body px-3 pb-3">
+        <p>Something won't home in your mind, why you keeping to thing about that ?
+            Yep, just throw it through the window
+        </p>
+        <img class="image-body" alt="image-1" src="https://img5.thuthuatphanmem.vn/uploads/2021/08/25/hinh-nen-3d-cho-may-tinh-4k_084701936.jpg"/>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -5,7 +5,7 @@ from posts.models import Post
 from posts.forms import CreatePostForm
 # Create your views here.
 class CreatePost(generic.ListView):
-    template_name = 'createPost.html'
+    template_name = 'listPost.html'
     paginate_by = 10
     
     def get_queryset(self) :
