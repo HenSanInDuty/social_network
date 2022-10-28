@@ -30,20 +30,74 @@
 .post-bottom {}
 
 .post-content {
-    background-color: #000;
+    background-color: #fdf9f9;
     width: 100%;
 }
 
-.post-content-header{
+.post-content-header {
     position: relative;
     font-weight: bold;
 }
 
-.post-content-body{
+.post-content-body {
     max-height: auto;
 }
-.image-body{
+
+.image-body {
     max-width: 100%;
     height: auto;
 }
 
+.body-content {
+    margin-top: 66px;
+}
+
+.side-content {
+    position: fixed;
+    height: 100%;
+    right: 0;
+    overflow-y: scroll;
+}
+
+.side-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.side-content::-webkit-scrollbar {
+    width: 2px;
+    background-color: #F5F5F5;
+}
+
+.side-content::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
+
+.side-left {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    overflow-y: scroll;
+}
+
+.side-left::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.3);
+    border-radius: 0px;
+}
+
+.side-left::-webkit-scrollbar {
+    width: 0px;
+}
+
+.side-left::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+}
+
+.middle {
+    position: fixed;
+    left: 16.7%;
+    overflow-y: scroll;
+}
