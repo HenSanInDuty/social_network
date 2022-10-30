@@ -7,7 +7,7 @@ from posts.forms import CreatePostForm
 # Create your views here.
 class CreatePost(LoginRequiredMixin,generic.ListView):
     login_url = '/signin/'
-    template_name = 'listPost.html'
+    template_name = 'posts/listPost.html'
     paginate_by = 10
     
     def get_queryset(self) :

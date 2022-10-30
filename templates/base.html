@@ -17,7 +17,7 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-success fixed-top shadow-lg">
       <div class="container-fluid">
-        <a class="navbar-brand text-bg-success" href="#">Fakebook</a>
+        <a class="navbar-brand text-bg-success" href="/posts">Fakebook</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -30,22 +30,26 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
-      <img
-        class="avatar rounded-circle me-2"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        data-bs-title="Nhan"
+      <div class="dropdown"
+      data-bs-toggle="dropdown" 
+      aria-expanded="false">
+        <img
+        class="avatar rounded-circle me-2 avatar-profile" 
         alt="avatar"
-        src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        data-bs-title="{{request.user.profile.fullname}}"
+        src="{{request.user.profile.avatar}}"
       />
+        <ul class="dropdown-profile dropdown-menu dropdown-menu-start">
+          <a class="dropdown-item" href="{% url 'detail-profile' request.user.id %}">Profile</a>
+          <a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a>
+        </ul>
+      </div>
     </nav>
     <div class="container-fluid body-content">
-      <div class="row justify-content-start">
-        <div class="side-left col-2 col-sm-2 bg-success text-white bg-opacity-75 fixed"></div>
-        <div class="middle col-8 col-sm-8 d-flex flex-column">
+      <div class="row justify-content-center">
           {% block content %}{% endblock %}
-        </div>
-        {% block sidecontent %}{% endblock %}
       </div>
     </div>
 
@@ -59,5 +63,6 @@
       integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
       crossorigin="anonymous"
     ></script>
+    <script src="{% static 'commonJS.js'%}"></script>
   </body>
 </html>

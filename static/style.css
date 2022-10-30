@@ -3,6 +3,20 @@
     width: 50px;
 }
 
+.avatar-lg {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    transform: translateY(-50%);
+}
+
+.avatar-profile:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .post-area {
     background-color: #fdf9f9;
     height: 5rem;
@@ -26,8 +40,6 @@
     width: 100%;
     align-items: center;
 }
-
-.post-bottom {}
 
 .post-content {
     background-color: #fdf9f9;
@@ -76,28 +88,27 @@
     background-color: #555;
 }
 
-.side-left {
+.side-left{
     position: fixed;
-    height: 100%;
+    height: 92vh;
     left: 0;
-    overflow-y: scroll;
 }
 
-.side-left::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.3);
-    border-radius: 0px;
+.dropdown-profile{
+    left: -7vw  !important;
 }
 
-.side-left::-webkit-scrollbar {
-    width: 0px;
+.profile-self{
+    position: relative;
+    background-color: #F5F5F5;
+    height: 15vh;
 }
 
-.side-left::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-}
-
-.middle {
-    position: fixed;
-    left: 16.7%;
-    overflow-y: scroll;
+.fullname-profile{
+    position: absolute;
+    font-size: 24px;
+    top:50%;
+    transform: translateY(-50%);
+    left:15%;
+    font-weight: 600;
 }

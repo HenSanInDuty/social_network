@@ -19,7 +19,7 @@ import authenticate.urls
     
 
 urlpatterns = [
+    path('', include(authenticate.urls)),
     path('admin/', admin.site.urls),
     path('posts/',include('posts.urls')),
-    path('', include(authenticate.urls))
 ]
