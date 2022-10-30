@@ -19,7 +19,7 @@
 
 .post-area {
     background-color: #fdf9f9;
-    height: 5rem;
+    height: 9rem;
     align-items: center;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .post-main {
-    height: 100%;
+    height: 50%;
     width: 100%;
     align-items: center;
 }
@@ -111,4 +111,25 @@
     transform: translateY(-50%);
     left:15%;
     font-weight: 600;
+}
+
+input[name="image-post"]{
+    display: none;
+}
+
+.image-file-group{
+    height: 60px;
+    width: 60px;
+    background-color: whitesmoke;
+}
+
+.image-post-image:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.post-bottom{
+    width: 100%;
+    height: 50%;
+    background-color: #cdc9c9;
 }

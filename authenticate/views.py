@@ -18,8 +18,6 @@ from posts.models import Attachment, Post
 from dotenv import load_dotenv
 load_dotenv()
 
-# Import the Cloudinary libraries
-# ==============================
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -75,7 +73,9 @@ def logout_view(request):
     return render(request, 'auth/login.html', {'form': AuthenticationForm}) 
 
 def upload_image(image):
-    pass
+    config = cloudinary.config(secure=True)
+    c = cloudinary.uploader.upload_image(image)
+    return c.url
 
 class ProfileDetail(LoginRequiredMixin,generic.ListView):
     login_url = '/signin/'
@@ -108,9 +108,15 @@ class ProfileDetail(LoginRequiredMixin,generic.ListView):
         count = 0
         if images:
             for i in images:
-                Attachment.objects.create(post=post)
+                if 'image' not in i.content_type:
+                    continue
                 if count == 4:
                     break
+                url_image = upload_image(i)
+                Attachment.objects.create(post=post,
+                                          type=0,
+                                          url=url_image)
+                count+=1
                     
                     
         return redirect(url)

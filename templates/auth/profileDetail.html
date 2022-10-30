@@ -15,7 +15,7 @@
   {% if request.user.profile == userProfile%}
   <form method="post" enctype="multipart/form-data">
     <div
-      class="post-area rounded d-flex flex-row justify-content-center mt-2 mb-4"
+      class="post-area rounded d-flex flex-column justify-content-center mt-2 mb-4"
     >
       <div class="post-main d-flex flex-row rounded">
         <img
@@ -24,10 +24,16 @@
           src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
         />
         {{form.content}}
-        <input name="image-post" type="file" multiple> 
         <button type="submit" class="btn btn-success btn-post mx-2">Post</button>
       </div>
-      <div class="post-bottom"></div>
+      <div class="post-bottom rounded-bottom">
+        <div class="image-file-group ms-2 rounded-circle mt-1">
+          <label for="image-post" class="image-post-image">
+            <img for="image-post" class="rounded-circle img-fluid p-2" alt="camera-icon" src="https://cdn-icons-png.flaticon.com/512/4551/4551689.png"/>
+          </label>
+          <input id="image-post" name="image-post" type="file" multiple> 
+        </div> 
+      </div>
     </div>
     {% csrf_token %}
   </form>
@@ -56,10 +62,10 @@
         {% elif post.attachment_set.all|length > 1 and post.attachment_set.all|length <= 4%}
         <div class="container text-center">
           <div class="row row-cols-2 g-3">
-            {% for n in non%}
-            <div class="col">
-              <img class="img-fluid rounded" alt="image-1" src="{{n}}" />
-            </div>
+            {% for image in post.attachment_set.all%}
+              <div class="col">
+                <img class="img-fluid rounded" alt="image-post" src="{{image.url}}" />
+              </div>
             {% endfor%}
           </div>
         </div>
