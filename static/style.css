@@ -145,3 +145,18 @@ input[name="image-post"] {
     height: 70px;
     width: 70px;
 }
+
+.delete-post-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.delete-post-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.like-js:hover {
+    cursor: pointer;
+}

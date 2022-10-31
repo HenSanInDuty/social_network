@@ -1,4 +1,5 @@
-from http.client import HTTPResponse
+from http import HTTPStatus
+from django.http import HttpResponse
 from django.http import Http404
 from email.policy import default
 from django.shortcuts import render
@@ -100,8 +101,26 @@ def profile_update(request):
             profile.update(fullname=fullname)
         if avatar and 'image' in avatar.content_type:
             profile.update(avatar=upload_image(avatar))
-        print(avatar)
     return redirect('/profile/'+str(request.user.id))
+
+def delete_post(request):
+    prev_url = request.META.get('HTTP_REFERER')
+    if request.method == "POST":
+        id_post = request.POST.get('delete-id')
+        Post.objects.filter(pk=id_post).delete()
+    return redirect(prev_url)
+
+def like_post(request,id_post):
+    if request.method == "POST":
+        user = request.user.profile_set.first()
+        post = Post.objects.filter(pk=id_post).first()
+        if user not in post.liker.all():
+            print('ok')
+            post.liker.add(user)
+        else:
+            post.liker.remove(user)
+        return HttpResponse(status = 200)
+    return HttpResponse(status = 404)
 
 class ProfileDetail(LoginRequiredMixin,generic.ListView):
     login_url = '/signin/'

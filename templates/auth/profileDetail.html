@@ -51,6 +51,13 @@
           src="{{userProfile.avatar}}"
         />
         <span class="post-username pt-3">{{userProfile.fullname}}</span>
+        {% if post.user == request.user %}
+        <div id="post-{{post.id}}" class="delete-post-button p-2" data-bs-toggle="modal" data-bs-target="#deleteConfirm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+          </svg>
+        </div>
+        {% endif %}
       </div>
       <div class="post-content-body px-3 pb-3">
         <p>
@@ -73,6 +80,11 @@
           </div>
         </div>
         {% endif %}
+        {% if request.user.profile_set.first not in post.liker.all %}
+          <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up like-js"></i>
+        {% else %}
+          <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up-fill like-js"></i>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -81,7 +93,7 @@
 {% include 'posts/listFriend.html' %} 
 
 
-<!-- Modal -->
+<!-- Modal edit profile -->
 <form method="post" action="/updateProfile/" enctype="multipart/form-data">
 <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -112,5 +124,27 @@
   </div>
 </div>
 {% csrf_token %}
-<form>
+</form>
+
+  <!-- Modal confirm delete -->
+<form method="post" action="/deletePost/">
+  <div class="modal fade" id="deleteConfirm" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteConfirmModalLabel">Delete post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-danger h6">Do you sure to delete this post?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="btn-delte-post-sub" name="delete-id" type="submit" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% csrf_token %}
+</form>
 {% endblock %}

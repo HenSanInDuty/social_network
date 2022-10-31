@@ -29,7 +29,6 @@ inputFiles.addEventListener('change', (value) => {
                 imageElement.src = URL.createObjectURL(value)
                 imageElement.classList = 'rounded-circle img-fluid p-2 ms-2 preview-img'
                 imageElement.alt = 'preview-img'
-                console.log(imageElement)
                 parent.append(imageElement)
                 count++
             }
@@ -37,5 +36,27 @@ inputFiles.addEventListener('change', (value) => {
             break
         }
     }
-    console.log(files)
+})
+
+//Delete post
+var deleteButton = document.querySelectorAll('.delete-post-button')
+deleteButton.forEach((value) => {
+    value.addEventListener('click', () => {
+        let id = value.id.substring(5)
+        let deleteBtnConfirm = document.getElementById('btn-delte-post-sub')
+        deleteBtnConfirm.value = id
+    })
+})
+
+//Like post
+var likeBtn = document.querySelectorAll('.like-js')
+likeBtn.forEach((value) => {
+    value.addEventListener('click', () => {
+        let id = value.id.substring(10)
+        var url = window.location.origin + `/likePost/${id}/`
+        $.post(url)
+            .done(() => {
+                console.log("noan")
+            })
+    })
 })
