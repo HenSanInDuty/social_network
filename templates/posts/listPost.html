@@ -4,6 +4,19 @@
 {% block content%}
 <div class="side-left col-2 col-sm-2 bg-success text-white bg-opacity-75 fixed pt-2">
   <span style="font-size: 20px;">Hint Friend</span>
+
+  {{ profiles.first }}
+  {% for profile in profiles %}
+
+    <div class="friend-line my-2">
+      <img
+          class="avatar rounded-circle"
+          alt="avatar"
+          src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+        />
+        <span class="post-username pt-3">{{ profile.fullname}}</span>
+    </div>
+   {% endfor %}
 </div>
 <div class="middle col-8 col-sm-8 d-flex flex-column">
   <form method="post" enctype="multipart/form-data">

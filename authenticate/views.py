@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from django.http import Http404
 from email.policy import default
 from django.shortcuts import render
@@ -49,8 +50,13 @@ def register(request):
             return render(request, "auth/register.html",{"form": form})
 
 def signin(request):
+
+    context = {
+    'profiles': Profile.objects.all(),
+  }
+
     if request.user.is_authenticated:
-        return redirect('/posts')
+        return render(request,'posts/listPost.html',context)
 
     elif request.method == "GET":
         return render(
@@ -66,7 +72,7 @@ def signin(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/posts')
+                return render(request,'posts/listPost.html',context)
             else:
                 print('User not found')
         else:
@@ -124,6 +130,5 @@ class ProfileDetail(LoginRequiredMixin,generic.ListView):
                                           type=0,
                                           url=url_image)
                 count+=1
-                    
-                    
+                       
         return redirect(url)

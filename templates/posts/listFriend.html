@@ -1,19 +1,14 @@
 <div class="side-content col-2 col-sm-2 bg-success text-white bg-opacity-75 fixed pt-2">
     <span style="font-size: 20px;">List Friend</span>
+
+    {% for friend in user.profile_set.first.friend.all %}
     <div class="friend-line my-2">
       <img
           class="avatar rounded-circle"
           alt="avatar"
           src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
         />
-        <span class="post-username pt-3">Tran Trong Nhan</span>
+        <span class="post-username pt-3">{{ friend.fullname}}</span>
     </div>
-    <div class="friend-line my-2">
-      <img
-          class="avatar rounded-circle"
-          alt="avatar"
-          src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
-        />
-        <span class="post-username pt-3">Tran Trong Nhan</span>
-    </div>
+   {% endfor %}
   </div>
