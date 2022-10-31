@@ -1,0 +1,79 @@
+{% extends 'base.html'%} 
+{% block title %}Profile{% endblock %} 
+{% block content %}
+<div class="middle col-8 col-sm-8 d-flex flex-column">
+  <div
+    class="profile-self rounded d-flex flex-row justify-content-start mt-2 mb-4"
+  >
+    <img
+      class="avatar avatar-lg rounded-circle"
+      alt="avatar"
+      src="{{userProfile.avatar}}"
+    />
+    <span class="fullname-profile">{{userProfile.fullname}}</span>
+  </div>
+  {% if request.user.profile == userProfile%}
+  <form method="post" enctype="multipart/form-data">
+    <div
+      class="post-area rounded d-flex flex-column justify-content-center mt-2 mb-4"
+    >
+      <div class="post-main d-flex flex-row rounded">
+        <img
+          class="avatar rounded-circle mx-2"
+          alt="avatar"
+          src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+        />
+        {{form.content}}
+        <button type="submit" class="btn btn-success btn-post mx-2">Post</button>
+      </div>
+      <div class="post-bottom rounded-bottom">
+        <div class="image-file-group ms-2 rounded-circle mt-1">
+          <label for="image-post" class="image-post-image">
+            <img for="image-post" class="rounded-circle img-fluid p-2" alt="camera-icon" src="https://cdn-icons-png.flaticon.com/512/4551/4551689.png"/>
+          </label>
+          <input id="image-post" name="image-post" type="file" multiple> 
+        </div> 
+      </div>
+    </div>
+    {% csrf_token %}
+  </form>
+  {% endif %}
+  {% for post in object_list %}
+  <div class="post-list d-flex flex-column mb-4">
+    <div class="post-content rounded d-flex flex-column mb-2">
+      <div class="post-content-header d-flex flex-row py-2">
+        <img
+          class="avatar rounded-circle mx-2"
+          alt="avatar"
+          src="{{userProfile.avatar}}"
+        />
+        <span class="post-username pt-3">{{userProfile.fullname}}</span>
+      </div>
+      <div class="post-content-body px-3 pb-3">
+        <p>
+          {{post.content}}
+        </p>
+        {% if post.attachment_set.all|length == 1 %}
+        <img
+          class="img-fluid rounded"
+          alt="image-1"
+          src="https://img5.thuthuatphanmem.vn/uploads/2021/08/25/hinh-nen-3d-cho-may-tinh-4k_084701936.jpg"
+        />
+        {% elif post.attachment_set.all|length > 1 and post.attachment_set.all|length <= 4%}
+        <div class="container text-center">
+          <div class="row row-cols-2 g-3">
+            {% for image in post.attachment_set.all%}
+              <div class="col">
+                <img class="img-fluid rounded" alt="image-post" src="{{image.url}}" />
+              </div>
+            {% endfor%}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% include 'posts/listFriend.html' %} 
+{% endblock %}

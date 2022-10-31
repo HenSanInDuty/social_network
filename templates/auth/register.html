@@ -1,6 +1,6 @@
 <!--users/templates/users/register.html-->
-
-
+{% extends 'baseNoLogin.html'%}
+{% block title %}Register{% endblock %}
 
 
 {% block content %}
@@ -12,5 +12,5 @@
     <input type="submit" value="Register">
 </form>
 
-<a href="{% url 'login' %}">Back to login</a>
+<a href="{% url 'signin' %}">Back to login</a>
 {% endblock %}

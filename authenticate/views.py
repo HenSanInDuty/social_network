@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 # Create your views here.
@@ -8,12 +9,25 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from authenticate.forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import generic
+
+from posts.forms import CreatePostForm
+from posts.models import Attachment, Post
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+import json
 
 def dashboard(request):
     return render(request, "auth/dashboard.html")
 
 def register(request):
-    print(request.method)
     if request.method == "GET":
         return render(
             request, "auth/register.html",
@@ -22,16 +36,14 @@ def register(request):
     elif request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            
-            print("post")
+            form.save()
             return render(request, "auth/login.html",{"form": AuthenticationForm})
         else:
             return render(request, "auth/register.html",{"form": form})
 
 def signin(request):
     if request.user.is_authenticated:
-        return render(request, "auth/dashboard.html")
+        return redirect('/posts')
 
     elif request.method == "GET":
         return render(
@@ -47,7 +59,7 @@ def signin(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request, "auth/dashboard.html")
+                return redirect('/posts')
             else:
                 print('User not found')
         else:
@@ -59,3 +71,52 @@ def signin(request):
 def logout_view(request):
     logout(request)
     return render(request, 'auth/login.html', {'form': AuthenticationForm}) 
+
+def upload_image(image):
+    config = cloudinary.config(secure=True)
+    c = cloudinary.uploader.upload_image(image)
+    return c.url
+
+class ProfileDetail(LoginRequiredMixin,generic.ListView):
+    login_url = '/signin/'
+    template_name = 'auth/profileDetail.html'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        #Get user in profile
+        user = User.objects.filter(id = self.kwargs.get('id')).first()
+        list_post = Post.objects.filter(user=user).order_by('-date')
+        return list_post
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CreatePostForm
+        user = User.objects.filter(id = self.kwargs.get('id')).first()
+        if user:
+            context['userProfile'] = user.profile
+            return context
+        else:
+            raise Http404(("Not found this user"))
+        
+    def post(self,request,**kwargs):
+        images = request.FILES.getlist('image-post')
+        form = CreatePostForm(request.POST)
+        url = self.request.get_full_path()
+        if not form.is_valid():
+            return redirect(url)
+        post = form.save(user=self.request.user)
+        count = 0
+        if images:
+            for i in images:
+                if 'image' not in i.content_type:
+                    continue
+                if count == 4:
+                    break
+                url_image = upload_image(i)
+                Attachment.objects.create(post=post,
+                                          type=0,
+                                          url=url_image)
+                count+=1
+                    
+                    
+        return redirect(url)

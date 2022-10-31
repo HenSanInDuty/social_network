@@ -3,17 +3,133 @@
     width: 50px;
 }
 
+.avatar-lg {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    transform: translateY(-50%);
+}
+
+.avatar-profile:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .post-area {
     background-color: #fdf9f9;
-    height: 30%;
+    height: 9rem;
+    align-items: center;
 }
 
 .post-area textarea {
-    background-color: #fdf9f9;
+    background-color: #f9f6f6;
     border: none;
     resize: none;
     width: 100%;
-    height: 100%;
+    height: 70%;
 }
 
-.post-content {}
+.btn-post {
+    height: 40px;
+}
+
+.post-main {
+    height: 50%;
+    width: 100%;
+    align-items: center;
+}
+
+.post-content {
+    background-color: #fdf9f9;
+    width: 100%;
+}
+
+.post-content-header {
+    position: relative;
+    font-weight: bold;
+}
+
+.post-content-body {
+    max-height: auto;
+}
+
+.image-body {
+    max-width: 100%;
+    height: auto;
+}
+
+.body-content {
+    margin-top: 66px;
+}
+
+.side-content {
+    position: fixed;
+    height: 100%;
+    right: 0;
+    overflow-y: scroll;
+}
+
+.side-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.side-content::-webkit-scrollbar {
+    width: 2px;
+    background-color: #F5F5F5;
+}
+
+.side-content::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
+
+.side-left{
+    position: fixed;
+    height: 92vh;
+    left: 0;
+}
+
+.dropdown-profile{
+    left: -7vw  !important;
+}
+
+.profile-self{
+    position: relative;
+    background-color: #F5F5F5;
+    height: 15vh;
+}
+
+.fullname-profile{
+    position: absolute;
+    font-size: 24px;
+    top:50%;
+    transform: translateY(-50%);
+    left:15%;
+    font-weight: 600;
+}
+
+input[name="image-post"]{
+    display: none;
+}
+
+.image-file-group{
+    height: 60px;
+    width: 60px;
+    background-color: whitesmoke;
+}
+
+.image-post-image:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.post-bottom{
+    width: 100%;
+    height: 50%;
+    background-color: #cdc9c9;
+}
