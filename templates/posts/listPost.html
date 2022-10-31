@@ -1,21 +1,35 @@
-{% extends 'base.html' %} {% load static%} {% block title %}Post{% endblock %}
+{% extends 'base.html' %} 
+{% load static%} 
+{% block title %}Post{% endblock %}
 {% block content%}
 <div class="side-left col-2 col-sm-2 bg-success text-white bg-opacity-75 fixed pt-2">
   <span style="font-size: 20px;">Hint Friend</span>
 </div>
 <div class="middle col-8 col-sm-8 d-flex flex-column">
-<div class="post-area rounded d-flex flex-row justify-content-center mt-2 mb-4">
-  <div class="post-main d-flex flex-row rounded">
-    <img
-      class="avatar rounded-circle mx-2"
-      alt="avatar"
-      src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
-    />
-    {{form.content}}
-    <button type="btn" class="btn btn-success btn-post mx-2">Post</button>
-  </div>
-  <div class="post-bottom"></div>
-</div>
+  <form method="post" enctype="multipart/form-data">
+    <div
+      class="post-area rounded d-flex flex-column justify-content-center mt-2 mb-4"
+    >
+      <div class="post-main d-flex flex-row rounded">
+        <img
+          class="avatar rounded-circle mx-2"
+          alt="avatar"
+          src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+        />
+        {{form.content}}
+        <button type="submit" class="btn btn-success btn-post mx-2">Post</button>
+      </div>
+      <div class="post-bottom rounded-bottom">
+        <div class="image-file-group ms-2 rounded-circle mt-1">
+          <label for="image-post" class="image-post-image">
+            <img for="image-post" class="rounded-circle img-fluid p-2" alt="camera-icon" src="https://cdn-icons-png.flaticon.com/512/4551/4551689.png"/>
+          </label>
+          <input id="image-post" name="image-post" type="file" multiple> 
+        </div> 
+      </div>
+    </div>
+    {% csrf_token %}
+  </form>
 <div class="post-list d-flex flex-column mb-4">
   <div class="post-content rounded d-flex flex-column mb-2">
     <div class="post-content-header d-flex flex-row py-2">

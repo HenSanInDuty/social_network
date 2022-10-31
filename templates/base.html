@@ -21,8 +21,8 @@
         <button
           class="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarText"
+          data-toggle="collapse"
+          data-target="#navbarText"
           aria-controls="navbarText"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -36,10 +36,10 @@
         <img
         class="avatar rounded-circle me-2 avatar-profile" 
         alt="avatar"
-        data-bs-toggle="tooltip"
-        data-bs-placement="bottom"
-        data-bs-title="{{request.user.profile.fullname}}"
-        src="{{request.user.profile.avatar}}"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="{{request.user.profile_set.first.fullname}}"
+        src="{{request.user.profile_set.first.avatar}}"
       />
         <ul class="dropdown-profile dropdown-menu dropdown-menu-start">
           <a class="dropdown-item" href="{% url 'detail-profile' request.user.id %}">Profile</a>
@@ -63,6 +63,7 @@
       integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="{% static 'commonJS.js'%}"></script>
   </body>
 </html>
