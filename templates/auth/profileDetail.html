@@ -16,7 +16,7 @@
     {% endif %}
   </div>
   {% if request.user.profile_set.first == userProfile%}
-  <form method="post" enctype="multipart/form-data">
+  <form id="post-form" method="post" enctype="multipart/form-data">
     <div
       class="post-area rounded d-flex flex-column justify-content-center mt-2 mb-4"
     >

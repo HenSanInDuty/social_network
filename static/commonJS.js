@@ -51,12 +51,26 @@ deleteButton.forEach((value) => {
 //Like post
 var likeBtn = document.querySelectorAll('.like-js')
 likeBtn.forEach((value) => {
-    value.addEventListener('click', () => {
+    value.addEventListener('click', (event) => {
         let id = value.id.substring(10)
         var url = window.location.origin + `/likePost/${id}/`
-        $.post(url)
+        var csrf = {
+            'csrfmiddlewaretoken': document.querySelector("#post-form input[name='csrfmiddlewaretoken']").value
+        }
+        let thumb = event.currentTarget
+        console.log(thumb.classList)
+        $.post(url, csrf)
             .done(() => {
-                console.log("noan")
+                if (thumb.classList.contains('bi-hand-thumbs-up')) {
+                    thumb.classList.remove('bi-hand-thumbs-up')
+                    thumb.classList.add('bi-hand-thumbs-up-fill')
+                    console.log('alo')
+                }
+
+                if (thumb.classList.contains('bi-hand-thumbs-up-fill')) {
+                    thumb.classList.remove('bi-hand-thumbs-up-fill')
+                    thumb.classList.add('bi-hand-thumbs-up')
+                }
             })
     })
 })
