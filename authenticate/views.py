@@ -84,6 +84,19 @@ def upload_image(image):
     c = cloudinary.uploader.upload_image(image)
     return c.url
 
+def profile_update(request):
+    if request.method == "POST":
+        user = request.user
+        profile = Profile.objects.filter(user=user)
+        fullname = request.POST['fullname']
+        avatar = request.FILES.get('avatar')
+        if fullname:
+            profile.update(fullname=fullname)
+        if avatar and 'image' in avatar.content_type:
+            profile.update(avatar=upload_image(avatar))
+        print(avatar)
+    return redirect('/profile/'+str(request.user.id))
+
 class ProfileDetail(LoginRequiredMixin,generic.ListView):
     login_url = '/signin/'
     template_name = 'auth/profileDetail.html'
@@ -124,6 +137,4 @@ class ProfileDetail(LoginRequiredMixin,generic.ListView):
                                           type=0,
                                           url=url_image)
                 count+=1
-                    
-                    
         return redirect(url)
