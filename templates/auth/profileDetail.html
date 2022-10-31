@@ -12,7 +12,7 @@
     />
     <span class="fullname-profile">{{userProfile.fullname}}</span>
   </div>
-  {% if request.user.profile == userProfile%}
+  {% if request.user.profile_set.first == userProfile%}
   <form method="post" enctype="multipart/form-data">
     <div
       class="post-area rounded d-flex flex-column justify-content-center mt-2 mb-4"
@@ -57,7 +57,7 @@
         <img
           class="img-fluid rounded"
           alt="image-1"
-          src="https://img5.thuthuatphanmem.vn/uploads/2021/08/25/hinh-nen-3d-cho-may-tinh-4k_084701936.jpg"
+          src="{{post.attachment_set.first.url}}"
         />
         {% elif post.attachment_set.all|length > 1 and post.attachment_set.all|length <= 4%}
         <div class="container text-center">

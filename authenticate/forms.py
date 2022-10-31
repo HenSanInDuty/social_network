@@ -4,8 +4,7 @@ from django import forms
 from .models import Profile
 
 class CustomUserCreationForm(UserCreationForm):
-    fullname = forms.CharField(max_length=100,required=True)
-    
+    fullname = forms.CharField(max_length=100)
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ("fullname",)
         

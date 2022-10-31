@@ -1,4 +1,5 @@
 from django.http import Http404
+from email.policy import default
 from django.shortcuts import render
 
 # Create your views here.
@@ -24,6 +25,10 @@ import cloudinary.api
 
 import json
 
+from authenticate.models import Profile
+
+default_avatar = ""
+
 def dashboard(request):
     return render(request, "auth/dashboard.html")
 
@@ -36,7 +41,9 @@ def register(request):
     elif request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+                      
+            print("post")
             return render(request, "auth/login.html",{"form": AuthenticationForm})
         else:
             return render(request, "auth/register.html",{"form": form})
@@ -93,7 +100,7 @@ class ProfileDetail(LoginRequiredMixin,generic.ListView):
         context['form'] = CreatePostForm
         user = User.objects.filter(id = self.kwargs.get('id')).first()
         if user:
-            context['userProfile'] = user.profile
+            context['userProfile'] = user.profile_set.first()
             return context
         else:
             raise Http404(("Not found this user"))
