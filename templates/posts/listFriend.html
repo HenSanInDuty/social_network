@@ -2,13 +2,23 @@
     <span style="font-size: 20px;">List Friend</span>
 
     {% for friend in user.profile_set.first.friend.all %}
-    <div class="friend-line my-2">
+    <div class="friend-line my-2 d-flex flex-row justify-content-between">
+      <div>
       <img
           class="avatar rounded-circle"
           alt="avatar"
           src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
         />
         <span class="post-username pt-3">{{ friend.fullname}}</span>
+        </div>
+        <form action="" method="post">
+        {% csrf_token %}
+          <input type="hidden" value="remove_friend" name="action" />
+          <input type="hidden" value={{user.pk}} name="cur_id" />
+          <input type="hidden" value={{friend.pk}} name="friend_id" />
+          <button class="btn btn-danger" type="submit"> Remove </button>
+        </form>
     </div>
+    
    {% endfor %}
   </div>

@@ -2,23 +2,36 @@
 {% load static%} 
 {% block title %}Post{% endblock %}
 {% block content%}
+
 <div class="side-left col-2 col-sm-2 bg-success text-white bg-opacity-75 fixed pt-2">
+<input type="hidden" value = {{user.pk}} name="cur_user"/>
   <span style="font-size: 20px;">Hint Friend</span>
-
-  {{ profiles.first }}
   {% for profile in profiles %}
-
-    <div class="friend-line my-2">
-      <img
-          class="avatar rounded-circle"
-          alt="avatar"
-          src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
-        />
-        <span class="post-username pt-3">{{ profile.fullname}}</span>
-    </div>
+    {% comment %} {% for friend in user.profile_set.first.friend.all %} {% endcomment %}
+      <div class="friend-line my-2 d-flex flex-row justify-content-between">
+        <div>
+          <img
+              class="avatar rounded-circle"
+              alt="avatar"
+              src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+            />
+            <span class="post-username pt-3">{{ profile.fullname}}</span>
+        </div>
+   
+      <form action="" method="post">
+        {% csrf_token %}
+          <input type="hidden" value="add_friend" name="action" />
+          <input type="hidden" value={{user.pk}} name="cur_id" />
+          <input type="hidden" value={{profile.pk}} name="friend_id" />
+        <button class="btn btn-secondary" type="submit"> Add </button>
+      </form>
+       
+      </div>
+     {% comment %} {% endfor %} {% endcomment %}
    {% endfor %}
 </div>
 <div class="middle col-8 col-sm-8 d-flex flex-column">
+{% csrf_token %}
   <form method="post" enctype="multipart/form-data">
     <div
       class="post-area rounded d-flex flex-column justify-content-center mt-2 mb-4"

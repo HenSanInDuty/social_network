@@ -52,12 +52,9 @@ def register(request):
 
 def signin(request):
 
-    context = {
-    'profiles': Profile.objects.all(),
-  }
 
     if request.user.is_authenticated:
-        return render(request,'posts/listPost.html',context)
+        return redirect('/posts')
 
     elif request.method == "GET":
         return render(
@@ -73,7 +70,7 @@ def signin(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request,'posts/listPost.html',context)
+                return redirect('/posts')
             else:
                 print('User not found')
         else:
