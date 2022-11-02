@@ -4,7 +4,6 @@
 {% block content%}
 
 <div class="side-left col-2 col-sm-2 bg-success text-white bg-opacity-75 fixed pt-2">
-<input type="hidden" value = {{user.pk}} name="cur_user"/>
   <span style="font-size: 20px;">Hint Friend</span>
   {% for profile in profiles %}
     {% comment %} {% for friend in user.profile_set.first.friend.all %} {% endcomment %}
