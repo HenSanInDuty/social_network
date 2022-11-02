@@ -160,3 +160,40 @@ input[name="image-post"] {
 .like-js:hover {
     cursor: pointer;
 }
+
+.center-screen{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.text-center{
+    text-align: center;
+}
+
+.form-header{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.form-body{
+    position: absolute;
+    top: 14%;
+    left: 80%;
+    transform: translateX(-50%);
+}
+
+.form-bottom{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);    
+}
+
+.form-box{
+    height: 50vh;
+    width: 50vw;
+}
