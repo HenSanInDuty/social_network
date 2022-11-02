@@ -115,7 +115,6 @@ def like_post(request,id_post):
         user = request.user.profile_set.first()
         post = Post.objects.filter(pk=id_post).first()
         if user not in post.liker.all():
-            print('ok')
             post.liker.add(user)
         else:
             post.liker.remove(user)
