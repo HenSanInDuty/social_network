@@ -3,14 +3,14 @@
 
     {% for friend in user.profile_set.first.friend.all %}
     <div class="friend-line my-2 d-flex flex-row justify-content-between">
-      <div>
+      <a class="text-decoration-none text-light" href="/profile/{{friend.user.id}}">
       <img
           class="avatar rounded-circle"
           alt="avatar"
           src="{{friend.avatar}}"
         />
         <span class="post-username pt-3">{{ friend.fullname}}</span>
-        </div>
+        </a>
         <form action="" method="post">
         {% csrf_token %}
           <input type="hidden" value="remove_friend" name="action" />

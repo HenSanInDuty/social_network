@@ -7,14 +7,14 @@
   <span style="font-size: 20px;">Hint Friend</span>
   {% for profile in profiles %}
       <div class="friend-line my-2 d-flex flex-row justify-content-between">
-        <div>
+        <a class="text-decoration-none text-light" href="/profile/{{profile.user.id}}">
           <img
               class="avatar rounded-circle"
               alt="avatar"
               src="{{profile.avatar}}"
             />
             <span class="post-username pt-3">{{ profile.fullname}}</span>
-        </div>
+        </a>
    
       <form action="" method="post">
         {% csrf_token %}
