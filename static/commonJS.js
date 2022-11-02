@@ -58,19 +58,20 @@ likeBtn.forEach((value) => {
             'csrfmiddlewaretoken': document.querySelector("#post-form input[name='csrfmiddlewaretoken']").value
         }
         let thumb = event.currentTarget
-        console.log(thumb.classList)
+        let numberLike = parseInt(document.getElementById(`number-like-${id}`).innerText)
         $.post(url, csrf)
             .done(() => {
                 if (thumb.classList.contains('bi-hand-thumbs-up')) {
                     thumb.classList.remove('bi-hand-thumbs-up')
                     thumb.classList.add('bi-hand-thumbs-up-fill')
-                    console.log('alo')
-                }
-
-                if (thumb.classList.contains('bi-hand-thumbs-up-fill')) {
+                    document.getElementById(`number-like-${id}`).innerText = `${numberLike + 1}`
+                } else if (thumb.classList.contains('bi-hand-thumbs-up-fill')) {
                     thumb.classList.remove('bi-hand-thumbs-up-fill')
                     thumb.classList.add('bi-hand-thumbs-up')
+                    document.getElementById(`number-like-${id}`).innerText = `${numberLike - 1}`
                 }
+
+                event.currentTarget = thumb
             })
     })
 })

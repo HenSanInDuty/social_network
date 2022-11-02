@@ -59,7 +59,7 @@
         </div>
         {% endif %}
       </div>
-      <div class="post-content-body px-3 pb-3">
+      <div class="post-content-body px-3 pb-3 d-flex flex-column">
         <p>
           {{post.content}}
         </p>
@@ -80,11 +80,14 @@
           </div>
         </div>
         {% endif %}
-        {% if request.user.profile_set.first not in post.liker.all %}
-          <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up like-js"></i>
-        {% else %}
-          <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up-fill like-js"></i>
-        {% endif %}
+        <div class="mt-4 d-flex flex-row">
+          {% if request.user.profile_set.first not in post.liker.all %}
+            <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up like-js"></i>
+          {% else %}
+            <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up-fill like-js"></i>
+          {% endif %}
+            <span id="number-like-{{post.id}}" class="ms-1">{{post.liker.all | length}}</span><span class="ms-2">Liked</span>
+        </div>
       </div>
     </div>
   </div>
