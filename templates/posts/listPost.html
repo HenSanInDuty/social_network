@@ -6,7 +6,6 @@
 <div class="side-left col-2 col-sm-2 bg-success text-white bg-opacity-75 fixed pt-2">
   <span style="font-size: 20px;">Hint Friend</span>
   {% for profile in profiles %}
-    {% comment %} {% for friend in user.profile_set.first.friend.all %} {% endcomment %}
       <div class="friend-line my-2 d-flex flex-row justify-content-between">
         <div>
           <img
@@ -26,12 +25,12 @@
       </form>
        
       </div>
-     {% comment %} {% endfor %} {% endcomment %}
    {% endfor %}
 </div>
 <div class="middle col-8 col-sm-8 d-flex flex-column">
+  <form id="post-form" method="post" enctype="multipart/form-data">
 {% csrf_token %}
-  <form method="post" enctype="multipart/form-data">
+  <input type="hidden" value="post" name="action" />
     <div
       class="post-area rounded d-flex flex-column justify-content-center mt-2 mb-4"
     >
@@ -56,43 +55,80 @@
     {% csrf_token %}
   </form>
 <div class="post-list d-flex flex-column mb-4">
-  <div class="post-content rounded d-flex flex-column mb-2">
-    <div class="post-content-header d-flex flex-row py-2">
-      <img
-        class="avatar rounded-circle mx-2"
-        alt="avatar"
-        src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
-      />
-      <span class="post-username pt-3">Tran Trong Nhan</span>
-    </div>
-    <div class="post-content-body px-3 pb-3">
-      <p>
-        Something won't home in your mind, why you keeping to thing about that ?
-      </p>
-      {% if non|length == 1 %}
-      <img
-        class="img-fluid rounded"
-        alt="image-1"
-        src="https://img5.thuthuatphanmem.vn/uploads/2021/08/25/hinh-nen-3d-cho-may-tinh-4k_084701936.jpg"
-      />
-      {% elif non|length > 1 and non|length <= 4%}
-      <div class="container text-center">
-        <div class="row row-cols-2 g-3">
-          {% for n in non%}
-          <div class="col">
-            <img
-              class="img-fluid rounded"
-              alt="image-1"
-              src="{{n}}"
-            />
+  {% for post in object_list %}
+  <div class="post-list d-flex flex-column mb-4">
+    <div class="post-content rounded d-flex flex-column mb-2">
+      <div class="post-content-header d-flex flex-row py-2">
+      
+        <img
+          class="avatar rounded-circle mx-2"
+          alt="avatar"
+          src="{{post.user.profile_set.first.avatar}}"
+        />
+        <span class="post-username pt-3">{{post.user.profile_set.first.fullname}}</span>
+        {% if post.user == request.user %}
+        <div id="post-{{post.id}}" class="delete-post-button p-2" data-bs-toggle="modal" data-bs-target="#deleteConfirm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+          </svg>
+        </div>
+        {% endif %}
+      </div>
+      <div class="post-content-body px-3 pb-3 d-flex flex-column">
+        <p>
+          {{post.content}}
+        </p>
+        {% if post.attachment_set.all|length == 1 %}
+        <img
+          class="img-fluid rounded"
+          alt="image-1"
+          src="{{post.attachment_set.first.url}}"
+        />
+        {% elif post.attachment_set.all|length > 1 and post.attachment_set.all|length <= 4%}
+        <div class="container text-center">
+          <div class="row row-cols-2 g-3">
+            {% for image in post.attachment_set.all%}
+              <div class="col">
+                <img class="img-fluid rounded" alt="image-post" src="{{image.url}}" />
+              </div>
+            {% endfor%}
           </div>
-          {% endfor%}
+        </div>
+        {% endif %}
+        <div class="mt-4 d-flex flex-row">
+          {% if request.user.profile_set.first not in post.liker.all %}
+            <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up like-js"></i>
+          {% else %}
+            <i id="like-post-{{post.id}}" class="bi bi-hand-thumbs-up-fill like-js"></i>
+          {% endif %}
+            <span id="number-like-{{post.id}}" class="ms-1">{{post.liker.all | length}}</span><span class="ms-2">Liked</span>
         </div>
       </div>
-      {% endif %}
     </div>
   </div>
-</div>
+  {% endfor %}
 </div>
 {% include 'posts/listFriend.html' %}
+
+ <!-- Modal confirm delete -->
+<form method="post" action="/deletePost/">
+  <div class="modal fade" id="deleteConfirm" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteConfirmModalLabel">Delete post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-danger h6">Do you sure to delete this post?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="btn-delte-post-sub" name="delete-id" type="submit" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% csrf_token %}
+</form>
 {% endblock %}
