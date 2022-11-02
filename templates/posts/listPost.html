@@ -11,7 +11,7 @@
           <img
               class="avatar rounded-circle"
               alt="avatar"
-              src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+              src="{{profile.avatar}}"
             />
             <span class="post-username pt-3">{{ profile.fullname}}</span>
         </div>
@@ -38,7 +38,7 @@
         <img
           class="avatar rounded-circle mx-2"
           alt="avatar"
-          src="https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000"
+          src={{user.profile_set.first.avatar}}
         />
         {{form.content}}
         <button type="submit" class="btn btn-success btn-post mx-2">Post</button>
