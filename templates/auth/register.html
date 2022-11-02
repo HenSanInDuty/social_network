@@ -11,20 +11,19 @@
     <div class="container form-body">
         <div class="row row-cols-2">
           <div class="col-3">{{form.username.label}}:</div>
-          <div class="col-9 mb-2">{{form.username}}</div>
+          <div class="col-9 mb-2">{{form.username}}{{form.username.errors}}</div>
           <div class="col-3">{{form.fullname.label}}:</div>
-          <div class="col-9 mb-2">{{form.fullname}}</div>
+          <div class="col-9 mb-2">{{form.fullname}}{{form.fullname.errors}}</div>
           <div class="col-3">{{form.password1.label}}:</div>
-          <div class="col-9 mb-2">{{form.password1}}</div>
+          <div class="col-9 mb-2">{{form.password1}}{{form.password1.errors}}</div>
           <div class="col-3">{{form.password2.label}}:</div>
-          <div class="col-9 mb-2">{{form.password2}}</div>
+          <div class="col-9 mb-2">{{form.password2}}{{form.password2.errors}}</div>
         </div>
+				<div class="d-flex justify-content-around">
+					<input class="btn btn-success" type="submit" value="Register">
+					<a class="btn btn-secondary" href="{% url 'signin' %}">Back to login</a>
+				<div>
       </div>
-      <div class="form-bottom">
-        <input class="btn btn-success" type="submit" value="Register">
-        <a class="btn btn-secondary" href="{% url 'signin' %}">Back to login</a>
-      <div>
-			
 </form>
 <div>
 {% endblock %}

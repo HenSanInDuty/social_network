@@ -188,12 +188,15 @@ input[name="image-post"] {
 
 .form-bottom{
     position: absolute;
-    top: 50%;
-    left: 50%;
+    left: 20%;
     transform: translateX(-50%);    
 }
 
 .form-box{
     height: 50vh;
     width: 50vw;
+}
+
+.errorlist{
+    color: red;
 }

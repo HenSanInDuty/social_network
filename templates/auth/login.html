@@ -7,16 +7,15 @@
 				<div class="container form-body">
 					<div class="row row-cols-2">
 						<div class="col-3">{{form.username.label}}:</div>
-						<div class="col-9 mb-2">{{form.username}}</div>
+						<div class="col-7 mb-2">{{form.username}}</div>
 						<div class="col-3">{{form.password.label}}:</div>
-						<div class="col-9 mb-2">{{form.password}}</div>
+						<div class="col-7 mb-2">{{form.password}}</div>
 					</div>
-				</div>
-        <div class="form-bottom">
-            <input class="btn btn-primary" type="submit" value="Login">
+					<div class="d-flex form-bottom">
+            <input class="btn btn-primary me-4" type="submit" value="Login">
             <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
-        </div>
-        
+        	</div>
+				</div>
     </form>
 </div>
 
