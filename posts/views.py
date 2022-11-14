@@ -21,6 +21,7 @@ class CreatePost(LoginRequiredMixin,generic.ListView):
         list_post = Post.objects.all().order_by('-date')
         list_post =  list_post.filter(user__profile__in = user.profile_set.first().friend.all())
         list_post |= Post.objects.filter(user__pk=user.pk)
+        #Nom Nom 1 Nom
         return list_post
     
     def get_context_data(self, **kwargs):
